@@ -9,6 +9,8 @@ import SignUpForm from "./components/signup-form"
 import LoginForm from "./components/login-form"
 import  GamePage  from "./components/games-page";
 import  Game  from "./components/game";
+import Home from "./components/home"
+import PlayingView from "./components/playing-view"
 
 //services 
 import userService from "./services/user"
@@ -33,12 +35,17 @@ const App = () => {
 		<>
 			<NavBar />
 			<Switch>
-				<Route exact path="/">home</Route>
+				<Route exact path="/">
+					<Home />
+				</Route>
 				<Route exact path="/games">
           <GamePage />
         </Route>
 				<Route path="/games/:id">
 					<Game />
+				</Route>
+				<Route path="/playing/:id">
+					<PlayingView />
 				</Route>
 				<Route exact path="/login">
 					<LoginForm />

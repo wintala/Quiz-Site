@@ -19,4 +19,13 @@ const editGame = async (id, req, user) => {
   return axios.put(`${baseUrl}/${id}`, req, config).then(response => response.data)
 }
 
-export default {newGame, oneGame, editGame}
+const findGame = async (name) => {
+  const config = {
+    params: {name},
+  }
+
+  return axios.get(baseUrl, config).then(response => response.data)
+}
+
+
+export default {newGame, oneGame, editGame, findGame}

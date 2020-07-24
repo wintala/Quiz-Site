@@ -21,6 +21,7 @@ const NavBar = () => {
 				</> :
 				<>
 				<Link to="/games">My Games</Link>
+			<span>Logged in {user.username}</span>
 				<button onClick = {logOut}>Log Out</button>
 				</>}
 

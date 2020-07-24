@@ -3,8 +3,13 @@ const Game = require("../models/game")
 const User = require("../models/user")
 
 gamesRouter.get("/", async (request, response) => {
-	const games = await Game.find({})
-	response.json(games)
+	const game = await Game.findOne({name: request.query.name})
+		.populate("moderators", { username: 1 })
+		.populate("questions", { question: 1, followUpQuestion: 1 })
+	if (!game) {
+		return response.status(404).json({error: "no matching resources"})
+	}
+	response.json(game)
 })
 
 gamesRouter.get("/:id", async (request, response) => {

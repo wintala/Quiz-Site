@@ -70,14 +70,16 @@ questionRouter.put("/:id", async (request, response) => {
 	}
 
 	const user = await User.findById(decodedToken.id)
+	const question = await Question.findById(request.params.id)
+	
 
 	if (user._id.toString() !== question.user.toString()) {
-		return(response.status(403).json({ error: "possible to delete only user's own question" }))
+		return(response.status(403).json({ error: "possible to edit only user's own question" }))
 	}
 
-	const question = await Question.findByIdAndUpdate(request.params.id, body, {new: true})
+	const editedQuestion = await Question.findByIdAndUpdate(request.params.id, body, {new: true})
 
-	response.json(question.toJSON())
+	response.json(editedQuestion)
 })
 
 module.exports = questionRouter

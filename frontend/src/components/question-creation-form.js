@@ -1,6 +1,7 @@
 import React, {useState} from "react"
-import { useSelector} from "react-redux"
+import { useSelector, useDispatch} from "react-redux"
 import questionService from "../services/question"
+import {addQuestion} from "../reducers/game"
  
 
 const QuestionCreationForm = () => {
@@ -9,13 +10,13 @@ const QuestionCreationForm = () => {
 	const [showFollowUp, setShowfollowUp] = useState(false)
 	const game = useSelector(state => state.game)
 	const user = useSelector(state => state.user)
-	//const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
 	const handleCreation = (e) => {
 		e.preventDefault()
-		const newFollowUpQuestion = followUpQuestion ? followUpQuestion : null
+		const newFollowUpQuestion = followUpQuestion ? followUpQuestion : ""
 		const newQuestion = {question, followUpQuestion: newFollowUpQuestion}
-		questionService.newQuestion(newQuestion, game.id, user).then(q => console.log(q))	
+		questionService.newQuestion(newQuestion, game.id, user).then(q => {dispatch(addQuestion(q))})	
 	}
 
 	return(
@@ -42,7 +43,7 @@ const QuestionCreationForm = () => {
 		</div>:
 		null}
 		<button type="button" onClick={() => setShowfollowUp(true)}>Add Follow-up Question</button>
-		<button id="login-button">login</button>
+		<button id="login-button">Create</button>
 	</form>
 	)
 

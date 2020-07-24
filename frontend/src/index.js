@@ -7,10 +7,10 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import gameReducer from "./reducers/game"
 
 import App from './App'
-import noteReducer from './reducers/user'
+import userReducer from './reducers/user'
 
 const reducer = combineReducers({
-  user: noteReducer,
+  user: userReducer,
   game: gameReducer
 })
 
