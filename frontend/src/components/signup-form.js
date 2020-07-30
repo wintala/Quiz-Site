@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import signUpService from "../services/signup";
 import loginService from "../services/login";
 import {setUser} from "../reducers/user"
-import {useDispatch} from "react-redux"
+import {Redirect} from "react-router-dom"
+import {useDispatch, useSelector} from "react-redux"
 
 const SignUpForm = () => {
 
@@ -10,6 +11,11 @@ const SignUpForm = () => {
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 	const [password2, setPassword2] = useState("")
+	const user = useSelector(state => state.user)
+
+	if (user) {
+		return <Redirect to="/games" />
+	}
 
 	const handleSignUp = async (e) => {
 		e.preventDefault()
@@ -17,15 +23,10 @@ const SignUpForm = () => {
 		// auto login after singing up
 		await loginService.login({username, password})
 		.then(user => {
-			window.localStorage.setItem('loggedUser', JSON.stringify(user))
+			window.localStorage.setItem('loggedUser', JSON.stringify(user.token))
 			dispatch(setUser(user))
 		})
-
-		setPassword("")
-		setPassword2("")
-		setUsername("")
-}
-
+	}
 
 	const disableSubmit = ((password !== password2) || (password.length < 4))
 
@@ -41,7 +42,7 @@ const SignUpForm = () => {
 
 
 	return (
-		<form onSubmit={handleSignUp}>
+		<form onSubmit={handleSignUp} className="user-form">
 			<h1>Sign Up</h1>
 			<div>
 				username
@@ -71,7 +72,10 @@ const SignUpForm = () => {
 				/>
 			</div>
 			<button id="login-button" disabled={disableSubmit}>Sign Up</button>
-			<span>{infoText}</span>
+			{infoText ?
+				<div id="password-message">{infoText}</div> :
+				null
+			}
 		</form>
 	)
 }

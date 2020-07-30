@@ -18,17 +18,17 @@ const GamesCreationForm = () => {
 
 	return(
 		<form onSubmit={handleSubmit}>
-		<h1>Create Game</h1>
+		<h2>Create Game</h2>
 		<div>
-			Name
 			<input
+			placeholder="Game name"
 				id="name"
 				type="text"
 				value={game.name}
 				onChange={({ target }) => setGame({name: target.value})}
 			/>
 		</div>
-		<button id="login-button">Create</button>
+		<button id="create-game-button">Create</button>
 	</form>
 	)
 }

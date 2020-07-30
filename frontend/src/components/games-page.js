@@ -24,24 +24,30 @@ const leaveButton = (id) => {
 	}
 
 	return(
-		<button onClick={handleClick}>Leave game</button>
+		<button id="leave-button" onClick={handleClick}>Leave game</button>
 	)
 }
 
 
 	return(
-		<div>
+			<div id="mygames">
+				<h2>My Games</h2>
+				<table>
+					<tbody>
+						{user.moderating.map(x => 
+						<tr key={x.id}>
+							<td>
+								<Link to={`/games/${x.id}`}>
+									{x.name}
+								</Link>
+							</td>
+							<td>
+								{leaveButton(x.id)}
+							</td>
+						</tr>)}
+					</tbody>
+				</table>
 			<GameCreationForm />
-			<h2>My Games</h2>
-			<ul>
-				{user.moderating.map(x => 
-				<li key={x.id}>
-					<Link to={`/games/${x.id}`}>
-						{x.name}
-					</Link>
-					{leaveButton(x.id)}
-				</li>)}
-			</ul>
 		</div>
 
 	)

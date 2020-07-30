@@ -1,12 +1,14 @@
 import React, { useState } from "react"
-import loginService from "../services/login";
+import loginService from "../services/login"
+import {Redirect} from "react-router-dom"
 import {setUser} from "../reducers/user"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 
 const LoginForm = () => {
 	const dispatch = useDispatch()
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
+	const user = useSelector(state => state.user)
 
 	const handleLogin = (e) => {
 		e.preventDefault()
@@ -14,13 +16,15 @@ const LoginForm = () => {
 		.then(user => {
 			dispatch(setUser(user))
 			window.localStorage.setItem('loggedUser', JSON.stringify(user.token))
-			setUsername("")
-			setPassword("")
 		})
 	}
 
+	if (user) {
+		return <Redirect to="/games" />
+	}
+
 	return (
-		<form onSubmit={handleLogin}>
+		<form onSubmit={handleLogin} className="user-form">
 			<h1>Log in</h1>
 			<div>
 				username
@@ -40,7 +44,7 @@ const LoginForm = () => {
 					onChange={({ target }) => setPassword(target.value)}
 				/>
 			</div>
-			<button id="login-button">login</button>
+			<button id="login-button">Login</button>
 		</form>
 	)
 }

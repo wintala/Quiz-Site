@@ -12,17 +12,17 @@ const NavBar = () => {
 		dispatch(setUser(null))
 	}
 	return (
-		<div>
+		<div className="nav">
 			<Link to="/">Home</Link>
 			{!user ?
 				<>
-					<Link to="/login">Login</Link>
-					<Link to="/signup">Sign Up</Link> 
+					<Link id="signup" to="/signup">Sign Up</Link> 
+					<Link id="login" to="/login">Login</Link>
 				</> :
 				<>
 				<Link to="/games">My Games</Link>
-			<span>Logged in {user.username}</span>
-				<button onClick = {logOut}>Log Out</button>
+				<button className="log-out-button" onClick = {logOut}>Log Out</button>
+				<span>{`Logged in ${user.username}`}</span>
 				</>}
 
 		</div>

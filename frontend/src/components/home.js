@@ -24,18 +24,21 @@ const  Home = () => {
 
 
 	return(
-		<>
-			<h1>Custom Quiz</h1>
-			<form onSubmit={handleSearch}>
+		<div className="home-view">
+			<div className="banner">
+				<h1>CUSTOM QUIZ</h1>
+			</div>
+			<form onSubmit={handleSearch} className="form">
 				<h2>Search game</h2>
 				<div>
 					<input
+						placeholder="Game name"
 						name="search"
 					/>
 				</div>
-				<button>Search</button>
+				<button id="search-button">Search</button>
 			</form>
-		</>
+		</div>
 	)
 }
 
