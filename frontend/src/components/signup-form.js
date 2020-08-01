@@ -45,7 +45,7 @@ const SignUpForm = () => {
 		<form onSubmit={handleSignUp} className="user-form">
 			<h1>Sign Up</h1>
 			<div>
-				username
+				Username
 				<input
 					id="username"
 					type="text"
@@ -54,7 +54,7 @@ const SignUpForm = () => {
 				/>
 			</div>
 			<div>
-				password
+				Password
 				<input
 					id="password"
 					type="password"
@@ -63,7 +63,7 @@ const SignUpForm = () => {
 				/>
 			</div>
 			<div>
-				password again
+				Password again
 				<input
 					id="password2"
 					type="password"

@@ -11,7 +11,7 @@ const PlayingView = () => {
 	const [currentIndex, setCurrentIndex] = useState(-1)
 	const [currentText, setCurrentText] = useState("Click start to start (obviosly)")
 	const [shuffeledQuestions, setShuffeledQuestions] = useState([])
-	const [followShowed, setfollowShowed] = useState(true)
+	const [showFollow, setShowFollow] = useState(false)
 	const [players, setPlayers] = useState([])
 	const game = useSelector(state => state.game)
 	const dispatch = useDispatch()
@@ -27,36 +27,49 @@ const PlayingView = () => {
 				const temp = toBeShuffeled[i]
 				toBeShuffeled[i] = toBeShuffeled[j]
 				toBeShuffeled[j] = temp
-				setShuffeledQuestions(toBeShuffeled)
 			}
+			setShuffeledQuestions(toBeShuffeled)
 		})
 }, [match.params.id, dispatch]);
 
- const handleNext = () => {
-	 if (gameEnded) {
-		setCurrentIndex(-1)
-		setCurrentText("Play Again?")
-		setfollowShowed(true)
-		setGameEnded(false)
-		return null
-	 }
 
-	const placePlayer = (question) => {
-		return question.replace("##", players[Math.floor(Math.random()*players.length)])
-	}
-
-	 if (followShowed) {
-		setCurrentIndex(currentIndex + 1)
-		setCurrentText(placePlayer(shuffeledQuestions[currentIndex + 1].question))
-		shuffeledQuestions[currentIndex + 1].followUpQuestion ? setfollowShowed(false) : void(0)
-	 } else {
-		setCurrentText(placePlayer(shuffeledQuestions[currentIndex].followUpQuestion))
-		setfollowShowed(true)
-		if (currentIndex === shuffeledQuestions.length - 1) {
-			setGameEnded(true)
+	const handleNext = () => {
+		if (gameEnded) {
+			setCurrentIndex(-1)
+			setCurrentText("Play Again?")
+			setShowFollow(false)
+			setGameEnded(false)
+			return null
 		}
-	 }
- }
+
+		const placePlayer = (question) => {
+			let modifiedQuestion = question
+			let copyPlayers = [...players]
+
+			while (modifiedQuestion.includes("##")) {
+				if (copyPlayers.length === 0) {
+					window.alert("Your game don't have enough players for this question, some player spots were not populated")
+					break;
+				} else {
+					const placedPersonIndex = Math.floor(Math.random()*copyPlayers.length)
+					modifiedQuestion = modifiedQuestion.replace("##", copyPlayers[placedPersonIndex])
+					copyPlayers.splice(placedPersonIndex, 1);
+				}
+			}
+			return modifiedQuestion
+		}
+
+		if (currentIndex === shuffeledQuestions.length - 1 && !showFollow) {
+			setGameEnded(true)
+		} else if (showFollow) {
+			setCurrentText(placePlayer(shuffeledQuestions[currentIndex].followUpQuestion))
+			setShowFollow(false)
+		} else {
+			setCurrentText(placePlayer(shuffeledQuestions[currentIndex + 1].question))
+			shuffeledQuestions[currentIndex + 1].followUpQuestion !== "" ? setShowFollow(true) : void(0)
+			setCurrentIndex(currentIndex + 1)
+		}
+ 	}
 
  const playerAddForm = () => {
 	const handleAdd = (e) => {

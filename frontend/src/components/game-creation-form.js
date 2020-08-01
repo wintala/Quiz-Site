@@ -17,7 +17,7 @@ const GamesCreationForm = () => {
 	}
 
 	return(
-		<form onSubmit={handleSubmit}>
+		<form id="question-creation-form" onSubmit={handleSubmit}>
 		<h2>Create Game</h2>
 		<div>
 			<input

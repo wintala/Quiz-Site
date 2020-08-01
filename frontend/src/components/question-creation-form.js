@@ -20,11 +20,11 @@ const QuestionCreationForm = () => {
 	}
 
 	return(
-		<form onSubmit={handleCreation}>
-		<h2>Add Question</h2>
+		<form id="question-creation-form" onSubmit={handleCreation}>
+		<h3>Add Question</h3>
 		<div>
-			question
-			<input
+			Question
+			<textarea
 				id="question"
 				type="text"
 				value={question}
@@ -33,8 +33,8 @@ const QuestionCreationForm = () => {
 		</div>
 		{showFollowUp ? 
 		<div>
-			follow-up question
-			<input
+			Follow-up question
+			<textarea
 				id="follow-up-question"
 				type="text"
 				value={followUpQuestion}
@@ -42,8 +42,12 @@ const QuestionCreationForm = () => {
 			/>
 		</div>:
 		null}
-		<button type="button" onClick={() => setShowfollowUp(true)}>Add Follow-up Question</button>
-		<button id="login-button">Create</button>
+		{showFollowUp ? 
+		null : 
+		<button id="show-followup-button" type="button" onClick={() => setShowfollowUp(true)}>
+			Add Follow-up Question
+		</button>}
+		<button id="question-create-button">Create</button>
 	</form>
 	)
 

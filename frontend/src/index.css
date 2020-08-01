@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-color: rgb(109, 126, 139);
-  background-image: url("https://static.vecteezy.com/system/resources/previews/000/094/691/original/abstract-pattern-background-vector.jpg");
+  background-image: url("background-image.png");
 }
 
 .nav {
@@ -111,7 +111,7 @@ body {
 }
 
 .user-form input {  
-  border: 2px solid rgb(129, 160, 145);
+  border: 2px solid rgb(78, 192, 159);
   margin: 10px 0;
   padding: 10px 10px;
   width: 90%;
@@ -146,7 +146,7 @@ body {
 }
 
 .form input {  
-  border: 2px solid rgb(129, 160, 145);
+  border: 2px solid rgb(78, 192, 159);
   margin: 5px 0;
   padding: 10px 10px;
   width: 90%;
@@ -167,7 +167,7 @@ body {
   border: 1px solid #ffffff;
 }
 
-#mygames {
+#mygames, #game {
   border: 2px solid #ffffff;
   margin: auto;
   color: rgb(255, 255, 255);
@@ -186,19 +186,17 @@ body {
 
 }
 
-#mygames table {
+table {
   margin: auto;
   color: #ffffff;
   background-color: rgb(78, 192, 159);
   width: 60%;
-  margin-bottom: 80px;
   border-collapse: collapse;
   border-radius: 12px;
   overflow: hidden;
 }
 
-
-#mygames tr {
+tr {
   height: 40px;
 }
 
@@ -208,6 +206,13 @@ td{
   text-align: center;
 }
 
+tr:last-child td {
+  border-bottom: none;
+}
+
+#mygames table {
+  margin-bottom: 80px;
+}
 
 #mygames a {
   text-decoration: none;
@@ -222,7 +227,7 @@ td{
 }
 
 #mygames input {  
-  border: 2px solid rgb(129, 160, 145);
+  border: 2px solid rgb(78, 192, 159);
   margin-bottom: 10px;
   padding: 10px 10px;
   width: 60%;
@@ -268,4 +273,190 @@ td{
   color: rgb(100, 100, 100);
 }
 
+
+#game #mod-table{
+  background-color: rgb(255, 235, 180);
+  color: #000000;
+  font-size: 18px;
+}
+
+#game #question-table {
+  background-color: rgb(88, 116, 189);
+  width: 95%;
+  margin-bottom: 50px;
+}
+
+#game #question-table th {
+  text-shadow: 1px 1px #000000;
+  background-color: rgb(53, 70, 112);
+}
+
+#game #my-questions-table {
+  width: 95%;
+}
+
+#edit-table {
+  margin: auto;
+  color: #ffffff;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+#edit-table td {
+  border-bottom: none;
+  text-align: left;
+  padding: 2px;
+}
+
+#game textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 2px solid rgb(78, 192, 159);
+  padding: 5px 10px;
+  border-radius: 8px;
+  height: 80px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#game textarea:focus {
+  background-color: rgb(255, 235, 180);
+  
+}
+
+#edit-table td:first-child {
+  max-width: 60px;
+}
+
+#play-button {
+  background-color: rgb(78, 192, 159);
+  padding: 15px 20px;
+  margin-bottom: 30px;
+	color: white;
+	border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+}
+
+#play-button:hover {
+  border: 2px solid rgb(78, 192, 159);
+  background-color: white;
+  color: rgb(78, 192, 159);
+}
+
+#modAdd, #show-modAdd {
+  background-color: rgb(214, 177, 43);
+  padding: 10px 15px;
+  margin-bottom: 50px;
+  margin-top: 10px;
+	color: white;
+	border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+}
+
+#modAdd:hover, #show-modAdd:hover  {
+  border: 2px solid rgb(214, 177, 43);
+  background-color: white;
+  color: rgb(214, 177, 43);
+}
+
+#game h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+#mod-add-form {
+  margin: auto;
+  width: 50%;
+  color: rgb(255, 255, 255);
+  font-weight: lighter;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#mod-add-form input {
+  border: 2px solid rgb(78, 192, 159);
+  padding: 5px 5px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#question-change-button, #show-followup-button {
+  background-color: rgb(214, 177, 43);
+  padding: 3px 5px;
+  margin-top: 5px;
+  margin-right: 2px;
+	color: white;
+	border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ffffff;
+}
+
+#show-followup-button {
+  background-color: rgb(88, 116, 189);
+  margin-bottom: 50px;
+}
+
+#question-change-button:hover{
+  border: 1px solid rgb(214, 177, 43);
+  background-color: white;
+  color: rgb(214, 177, 43);
+}
+
+#show-followup-button:hover{
+  border: 1px solid rgb(88, 116, 189);
+  background-color: white;
+  color: rgb(88, 116, 189);
+}
+
+#question-delete-button, #question-create-button {
+  background-color: rgb(243, 115, 76);
+  padding: 3px 5px;
+  margin-top: 5px;
+  margin-left: 2px;
+	color: white;
+	border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ffffff;
+}
+
+#question-create-button {
+  background-color: rgb(78, 192, 159);
+  margin-bottom: 50px;
+}
+
+#question-delete-button:hover{
+  border: 1px solid rgb(243, 115, 76);
+  background-color: white;
+  color: rgb(243, 115, 76);
+}
+
+#question-create-button:hover{
+  border: 1px solid rgb(78, 192, 159);
+  background-color: white;
+  color: rgb(78, 192, 159);
+}
+
+#question-creation-form {
+  margin: auto;
+  width: 90%;
+  color: rgb(255, 255, 255);
+  font-weight: lighter;
+  margin-top: 10px;
+  text-align: center;
+}
 

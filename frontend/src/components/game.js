@@ -25,39 +25,57 @@ const Game = () => {
 
 
 	const questionList = (questions) => (
-	<ul>
-		{questions.map(q => 
-		<li key={q.id}>
-			Question: {q.question}
-			Follow-up Question: {q.followUpQuestion}
-		</li>)}
-	</ul>)
+		<table id="question-table">
+			<tbody>
+				<tr>
+					<th>
+						QUESTION
+					</th>
+					<th>
+						FOLLOW-UP QUESTION
+					</th>
+				</tr>
+				{questions.map(q => 
+				<tr key={q.id}>
+					<td>{q.question}</td>
+					<td>{q.followUpQuestion}</td>
+				</tr>)}
+			</tbody>
+		</table>
+		)
 
 	const myQuestionList = (questions) => {
 
 		return(
 			user && game.moderators.map(m => m.id).includes(user.id) ?
 			<div>
-				<h3>My questions in this game</h3>
-				<ul>
-					{questions.filter(q => user.questions.includes(q.id)).map(q => 
-					<li key={q.id}>
-						<QuestionEditForm q={q} />
-					</li>)}
-				</ul>
-				<QuestionCreationForm />
+				<h2>My questions in this game</h2>
+				<table id="my-questions-table">
+					<tbody>
+						{questions.filter(q => user.questions.includes(q.id)).map(q => 
+						<tr key={q.id}>
+							<td>
+								<QuestionEditForm q={q} />
+							</td>
+						</tr>)}
+					</tbody>
+				</table>
 			</div> :
 			null
 		)
 	}
 
 	const moderatorList = (mod) => (
-		<ul>
-			{mod.map(m => 
-			<li key={m.id}>
-				{m.username}
-			</li>)}
-		</ul>)
+		<table id="mod-table">
+			<tbody>
+				{mod.map(m => 
+				<tr key={m.id}>
+					<td>
+						{m.username}
+					</td>
+				</tr>)}
+			</tbody>
+		</table>)
 
 	const modAdder = () => {
 
@@ -70,32 +88,33 @@ const Game = () => {
 
 	return(
 		modAddFormShowing ?
-			<form onSubmit={handleModAdd}>
+			<form id="mod-add-form" onSubmit={handleModAdd}>
 			<div>
-				username
+				Username
 				<input
 					name="moderator"
 				/>
 			</div>
 			<button id="modAdd">Add Moderator</button>
 		</form> :
-		<button onClick={() => setModAddFormShowing(true)} >Add</button>
+		<button id="show-modAdd" onClick={() => setModAddFormShowing(true)} >Add</button>
 	)
 }
 
 
 	return(
 		game ? 
-		<div>
-			<h2>{game.name}</h2>
-			<button onClick={() => {setStartPlay(true)}} >Play</button>
-			<h3>Moderators</h3>
+		<div id="game" >
+			<h1>{game.name}</h1>
+			<button id="play-button" onClick={() => {setStartPlay(true)}} >Play</button>
+			<h2>Moderators</h2>
 			{moderatorList(game.moderators)}
 			{user && game.moderators.map(m => m.id).includes(user.id) ?
 			modAdder() :
 			null}
-			<h3>Questions</h3>
+			<h2>Questions</h2>
 			{questionList(game.questions)}
+			<QuestionCreationForm />
 			{myQuestionList(game.questions)}
 		</div> :
 		null
