@@ -1,9 +1,11 @@
-body {
+html, body, #root {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-color: rgb(109, 126, 139);
   background-image: url("background-image.png");
+  height: 100%;
 }
+
 
 .nav {
 	overflow: hidden;
@@ -167,24 +169,65 @@ body {
   border: 1px solid #ffffff;
 }
 
-#mygames, #game {
+
+#mygames, #game, #game-init-page{
   border: 2px solid #ffffff;
   margin: auto;
   color: rgb(255, 255, 255);
   font-weight: lighter;
-  margin-top: 50px;
-  width: 60%;
+  margin-top: 5vh;
+  width: 80vw;
   padding: 20px;
+  max-width: 700px;
   text-align: center;
 	background-color:	rgb(80, 78, 73);
   border-radius: 20px;
 }
 
+#helper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#playing-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  vertical-align: middle;
+  border: 2px solid #ffffff;
+  color: rgb(55, 255, 255);
+  width: 80vw;
+  height: 80vh;
+  text-align: middle;
+	background-color:	rgb(80, 78, 73);
+  border-radius: 20px;
+  font-size: 25px;
+}
+
 #mygames h2 {
   color: #ffffff;
   text-shadow: 2px 2px #000000;
-
 }
+
+#game-init-page h1 {
+  color: #ffffff;
+  text-shadow: 2px 2px #000000;
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+#game-init-page h3 {
+  color: #ffffff;
+  text-shadow: 1px 1px #000000;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
 
 table {
   margin: auto;
@@ -212,6 +255,12 @@ tr:last-child td {
 
 #mygames table {
   margin-bottom: 80px;
+}
+
+#game-init-page table{
+  width: 40%;
+  background-color: rgb(214, 177, 43);
+  margin-bottom: 40px;
 }
 
 #mygames a {
@@ -328,7 +377,7 @@ tr:last-child td {
   max-width: 60px;
 }
 
-#play-button {
+#play-button, #start-button, #info-button {
   background-color: rgb(78, 192, 159);
   padding: 15px 20px;
   margin-bottom: 30px;
@@ -341,13 +390,44 @@ tr:last-child td {
   border: 2px solid #ffffff;
 }
 
+#start-button, #info-button {
+  width: 90px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+#info-button {
+  background-color: rgb(88, 116, 189);
+}
+
+#info-button:hover {
+  border: 2px solid rgb(88, 116, 189);
+  background-color: white;
+}
+
+#info-button:hover a {
+  color: rgb(88, 116, 189);
+}
+
+#start-button:hover {
+  border: 2px solid rgb(78, 192, 159);
+  background-color: white;
+  color: rgb(78, 192, 159);
+}
+
+#info-button a {
+  color: #f2f2f2;
+  text-align: center;
+  text-decoration: none;
+}
+
 #play-button:hover {
   border: 2px solid rgb(78, 192, 159);
   background-color: white;
   color: rgb(78, 192, 159);
 }
 
-#modAdd, #show-modAdd {
+#modAdd, #show-modAdd, #player-add-button {
   background-color: rgb(214, 177, 43);
   padding: 10px 15px;
   margin-bottom: 50px;
@@ -361,10 +441,14 @@ tr:last-child td {
   border: 2px solid #ffffff;
 }
 
-#modAdd:hover, #show-modAdd:hover  {
+#modAdd:hover, #show-modAdd:hover, #player-add-button:hover {
   border: 2px solid rgb(214, 177, 43);
   background-color: white;
   color: rgb(214, 177, 43);
+}
+
+#player-add-button {
+  margin-bottom: 20px;
 }
 
 #game h1 {
@@ -391,7 +475,7 @@ tr:last-child td {
 
 #question-change-button, #show-followup-button {
   background-color: rgb(214, 177, 43);
-  padding: 3px 5px;
+  padding: 5px 10px;
   margin-top: 5px;
   margin-right: 2px;
 	color: white;
@@ -422,7 +506,7 @@ tr:last-child td {
 
 #question-delete-button, #question-create-button {
   background-color: rgb(243, 115, 76);
-  padding: 3px 5px;
+  padding: 5px 10px;
   margin-top: 5px;
   margin-left: 2px;
 	color: white;
@@ -458,5 +542,54 @@ tr:last-child td {
   font-weight: lighter;
   margin-top: 10px;
   text-align: center;
+}
+
+#game-init-page input {  
+  border: 2px solid rgb(78, 192, 159);
+  margin-bottom: 10px;
+  padding: 10px 10px;
+  width: 50%;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+#playing-view  button{
+  background-color: rgb(78, 192, 159);
+  padding: 10px 15px;
+	color: white;
+	border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 25px;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+}
+
+#question-text {
+  padding: 20px 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+#player-placement-info {
+  color: rgb(255, 235, 180);
+  font-size: 13px;
+ }
+
+ #player-placement-info .tooltip {
+  visibility: hidden;
+  margin: auto;
+  background-color: rgb(214, 177, 43);
+  text-shadow: 1px 1px black;
+  border: 2px solid #fff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 3px 0;
+  margin-bottom: 0;
+}
+
+#player-placement-info:hover .tooltip {
+  visibility: visible;
 }
 

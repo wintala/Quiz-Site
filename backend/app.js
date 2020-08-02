@@ -23,6 +23,7 @@ mongoose.connect(config.MONGODB_URI, {
 	useUnifiedTopology: true,
 })
 
+app.use(express.static("build"))
 app.use(express.json())
 app.use(logger)
 app.use(tokenMiddlewares.tokenExtractor)

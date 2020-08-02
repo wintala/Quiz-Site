@@ -22,6 +22,12 @@ const QuestionCreationForm = () => {
 	return(
 		<form id="question-creation-form" onSubmit={handleCreation}>
 		<h3>Add Question</h3>
+		<div id="player-placement-info">
+			Use double hashtag "##" if you want to place player names to your question
+			<div className="tooltip">
+				When question contains "##" it will be replaced by one randomly selected player of the game
+			</div>
+		</div>
 		<div>
 			Question
 			<textarea

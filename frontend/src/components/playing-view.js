@@ -75,44 +75,75 @@ const PlayingView = () => {
 	const handleAdd = (e) => {
 		e.preventDefault()
 		const newPlayer = e.target.player.value
-		setPlayers(players.concat(newPlayer))
+		if (newPlayer) {
+			setPlayers(players.concat(newPlayer))
+		}
 		e.target.player.value = ""
 	}
 
 	 return(
 		<div>
-			<ul>
-				{players.map(p => <li key={p}>{p}</li>)}
-			</ul>
+			<table>
+				<tbody>
+					{players.map(p => 
+					<tr key={p}>
+						<td>
+							{p}
+						</td>
+						<td>
+							<img 
+							onClick={() => setPlayers(players.filter(x => x !== p))}
+							src={require("../x-but.png")} 
+							width="20" 
+							height="20" 
+							alt="delete"></img>
+						</td>
+					</tr>)}
+				</tbody>
+			</table>
 			<form onSubmit={handleAdd}>
-				<h2>Add Players</h2>
+				<h3>Add Players</h3>
 				<div>
-					name
 					<input
+					placeholder="name"
 						name="player"
 					/>
 				</div>
-				<button id="login-button">Add</button>
+				<button id="player-add-button">Add</button>
 			</form>
 		</div>
 	 )
  }
 
+ const randomColor = () => {
+	 const colors = ["rgb(243, 115, 76)", "rgb(88, 116, 189)", "rgb(214, 177, 43)", "rgb(78, 192, 159)"]
+	 return colors[Math.floor(Math.random() * colors.length)]
+	}
+
+ const randomColorStyle = {color: randomColor()}
+ const randomBackGroundStyle = {backgroundColor: randomColor()}
+
 
 	return(
 		game ? 
 			playing ?
-			  <div>
-					<div>
-						{!gameEnded ? currentText : "Game ended."}
+				<div id="helper">
+			  	<div id="playing-view">
+						<div id="question-text" style={randomColorStyle}>
+							{!gameEnded ? currentText : "Game ended."}
+						</div>
+						<button style={randomBackGroundStyle} onClick={handleNext}>{currentIndex === -1 ? "Start" : "Next"}</button>
 					</div>
-					<button onClick={handleNext}>{currentIndex === -1 ? "Start" : "Next"}</button>
 				</div>:
-				<div>
-					<h2>{game.name}</h2>
-					<Link to={`/games/${game.id}`}>Info</Link>
-					<button disabled={players.length < 2} onClick={() => setPlaying(true)}>Play</button>
-					 {players.length < 2 ? <span> Min two players needed to start</span> : null}
+				<div id="game-init-page">
+					<h1>{game.name}</h1>
+					<button id="info-button">
+						<Link to={`/games/${game.id}`}>Info</Link>
+					</button>
+					<button id="start-button" disabled={players.length < 2} onClick={() => setPlaying(true)}>
+						Start
+					</button>
+					 {players.length < 2 ? <div> Min two players needed to start</div> : null}
 					{playerAddForm()}
 				</div> :
 			null
