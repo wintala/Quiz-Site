@@ -11,6 +11,7 @@ import  GamePage  from "./components/games-page";
 import  Game  from "./components/game";
 import Home from "./components/home"
 import PlayingView from "./components/playing-view"
+import Notification from "./components/notification"
 
 //services 
 import userService from "./services/user"
@@ -34,6 +35,7 @@ const App = () => {
 	return (
 		<>
 			<NavBar />
+			<Notification />
 			<Switch>
 				<Route exact path="/">
 					<Home />

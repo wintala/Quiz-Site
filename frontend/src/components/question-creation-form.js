@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { useSelector, useDispatch} from "react-redux"
 import questionService from "../services/question"
 import {addQuestion} from "../reducers/game"
+import {setNotification} from "../reducers/notification"
  
 
 const QuestionCreationForm = () => {
@@ -16,7 +17,10 @@ const QuestionCreationForm = () => {
 		e.preventDefault()
 		const newFollowUpQuestion = followUpQuestion ? followUpQuestion : ""
 		const newQuestion = {question, followUpQuestion: newFollowUpQuestion}
-		questionService.newQuestion(newQuestion, game.id, user).then(q => {dispatch(addQuestion(q))})	
+		questionService.newQuestion(newQuestion, game.id, user).then(q => {
+			dispatch(addQuestion(q))
+			dispatch(setNotification("Question added", 2))
+		})	
 	}
 
 	return(
@@ -25,7 +29,7 @@ const QuestionCreationForm = () => {
 		<div id="player-placement-info">
 			Use double hashtag "##" if you want to place player names to your question
 			<div className="tooltip">
-				When question contains "##" it will be replaced by one randomly selected player of the game
+				Every "##" in question will be replaced by one unique randomly selected player of the game
 			</div>
 		</div>
 		<div>

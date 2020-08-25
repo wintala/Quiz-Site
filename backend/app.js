@@ -1,5 +1,6 @@
 const config = require("./utils/config")
 
+const path = require("path")
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
@@ -36,5 +37,9 @@ app.use("/api/questions", questionRouter)
 
 app.use(tokenMiddlewares.tokenError)
 app.use(errorHandler)
+
+app.get("*", (req,res) =>{
+	res.sendFile(path.join(__dirname + "/build/index.html"))
+})
 
 module.exports = app

@@ -8,10 +8,12 @@ import gameReducer from "./reducers/game"
 
 import App from './App'
 import userReducer from './reducers/user'
+import notiReducer from './reducers/notification'
 
 const reducer = combineReducers({
   user: userReducer,
-  game: gameReducer
+  game: gameReducer,
+  notification: notiReducer
 })
 
 const store = createStore(reducer, composeWithDevTools())

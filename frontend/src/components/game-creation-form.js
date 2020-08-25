@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { useSelector, useDispatch} from "react-redux"
 import gameService from "../services/game"
 import {addGame} from "../reducers/user"
+import {setNotification} from "../reducers/notification"
 
 
 
@@ -14,6 +15,7 @@ const GamesCreationForm = () => {
 		e.preventDefault()
 		const newGame = await gameService.newGame(game, user)
 		dispatch(addGame(newGame))
+		dispatch(setNotification("Game created", 2))
 	}
 
 	return(

@@ -16,6 +16,7 @@ questionRouter.get("/:id", async (request, response) => {
 questionRouter.post("/", async (request, response) => {
 	const body = request.body
 	const decodedToken = request.decodedToken
+	console.log("jooo")
 
 	if (!decodedToken) {
 		return response.status(401).json({ error: "token missing" })
@@ -24,6 +25,10 @@ questionRouter.post("/", async (request, response) => {
 	const user = await User.findById(decodedToken.id)
 	const game = await Game.findById(body.game)
 	const newQuestion = new Question({ ...body, user: user._id })
+
+	if (!game.moderators.includes(user._id)) {
+		return(response.status(403).json({ error: "possible only to add question to players own games" }))
+	}
 
 	user.questions.push(newQuestion._id)
 	game.questions.push(newQuestion._id)

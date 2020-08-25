@@ -21,8 +21,10 @@ const QuestionEditForm = ({q}) => {
 	}
 
 	const handleDelete = (id) => {
-		questionService.deleteQuestion(id, user)
-		dispatch(deleteQuestion(id))
+		if (window.confirm("Delete this question?")) {
+			questionService.deleteQuestion(id, user)
+			dispatch(deleteQuestion(id))
+		}
 	}
 
 	return(

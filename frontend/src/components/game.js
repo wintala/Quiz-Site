@@ -4,6 +4,7 @@ import { useRouteMatch, Redirect } from "react-router-dom"
 import gameService from "../services/game"
 import {setGame} from "../reducers/game"
 import QuestionEditForm from "./question-edit-form"
+import { setNotification } from "../reducers/notification";
 
 import QuestionCreationForm from "./question-creation-form"
 
@@ -25,6 +26,8 @@ const Game = () => {
 
 
 	const questionList = (questions) => (
+		questions.length === 0 ?
+		<div style={{marginBottom: "50px"}}>This game has no questions yet</div> :
 		<table id="question-table">
 			<tbody>
 				<tr>
@@ -47,9 +50,10 @@ const Game = () => {
 	const myQuestionList = (questions) => {
 
 		return(
-			user && game.moderators.map(m => m.id).includes(user.id) ?
 			<div>
 				<h2>My questions in this game</h2>
+				{questions.length === 0 ?
+				<div>You haven't created any question to this game</div> :
 				<table id="my-questions-table">
 					<tbody>
 						{questions.filter(q => user.questions.includes(q.id)).map(q => 
@@ -59,9 +63,8 @@ const Game = () => {
 							</td>
 						</tr>)}
 					</tbody>
-				</table>
-			</div> :
-			null
+				</table>}
+			</div>
 		)
 	}
 
@@ -83,6 +86,7 @@ const Game = () => {
 			e.preventDefault()
 			const newModerator = e.target.moderator.value
 			gameService.editGame(game.id, {newModerator}, user).then(g => dispatch(setGame(g)))
+			.catch(e => dispatch(setNotification(`User "${newModerator}" doesn't exist`, 3)))
 			e.target.moderator.value = ""
 		}
 
@@ -114,8 +118,13 @@ const Game = () => {
 			null}
 			<h2>Questions</h2>
 			{questionList(game.questions)}
-			<QuestionCreationForm />
-			{myQuestionList(game.questions)}
+
+			{user && game.moderators.map(m => m.id).includes(user.id) ?
+			<>
+				<QuestionCreationForm />
+				{myQuestionList(game.questions)} 
+			</>:
+			null}
 		</div> :
 		null
 	)

@@ -3,6 +3,7 @@ import loginService from "../services/login"
 import {Redirect} from "react-router-dom"
 import {setUser} from "../reducers/user"
 import {useDispatch, useSelector} from "react-redux"
+import { setNotification } from "../reducers/notification";
 
 const LoginForm = () => {
 	const dispatch = useDispatch()
@@ -17,6 +18,7 @@ const LoginForm = () => {
 			dispatch(setUser(user))
 			window.localStorage.setItem('loggedUser', JSON.stringify(user.token))
 		})
+		.catch(e => dispatch(setNotification("Wrong username or password", 3)))
 	}
 
 	if (user) {

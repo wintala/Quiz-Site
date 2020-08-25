@@ -9,7 +9,7 @@ const PlayingView = () => {
 	const [playing, setPlaying] = useState(false)
 	const [gameEnded, setGameEnded] = useState(false)
 	const [currentIndex, setCurrentIndex] = useState(-1)
-	const [currentText, setCurrentText] = useState("Click start to start (obviosly)")
+	const [currentText, setCurrentText] = useState(null)
 	const [shuffeledQuestions, setShuffeledQuestions] = useState([])
 	const [showFollow, setShowFollow] = useState(false)
 	const [players, setPlayers] = useState([])

@@ -32,6 +32,8 @@ const leaveButton = (id) => {
 	return(
 			<div id="mygames">
 				<h2>My Games</h2>
+				{user.moderating.length === 0 ? 
+				<div> You have no games. Ask your friends to add you as moderator to their games or create a new game</div>:
 				<table>
 					<tbody>
 						{user.moderating.map(x => 
@@ -46,7 +48,7 @@ const leaveButton = (id) => {
 							</td>
 						</tr>)}
 					</tbody>
-				</table>
+				</table>}
 			<GameCreationForm />
 		</div>
 

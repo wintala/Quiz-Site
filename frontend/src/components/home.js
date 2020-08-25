@@ -3,6 +3,7 @@ import gameService from "../services/game"
 import { Redirect } from "react-router-dom"
 import {useDispatch} from "react-redux"
 import {setGame} from "../reducers/game"
+import {setNotification} from "../reducers/notification"
 
 const  Home = () => {
 	const [redirect, setRedirect] = useState(null)
@@ -15,11 +16,12 @@ const  Home = () => {
 	const handleSearch = (e) => {
 		e.preventDefault()
 		const search = e.target.search.value
-		gameService.findGame(search).then(g => {
+		gameService.findGame(search)
+		.then(g => {
 			dispatch(setGame(g))
 			setRedirect(`/playing/${g.id}`)
-			
 		})
+		.catch(e => dispatch(setNotification("No matches :(", 2)))
 	}
 
 
