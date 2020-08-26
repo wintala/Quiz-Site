@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { useSelector, useDispatch} from "react-redux"
 import questionService from "../services/question"
 import {editQuestion, deleteQuestion} from "../reducers/game"
+import {setNotification} from "../reducers/notification"
  
 
 const QuestionEditForm = ({q}) => {
@@ -17,7 +18,10 @@ const QuestionEditForm = ({q}) => {
 		if (followUpQuestion === q.followUpQuestion && question === q.question) {
 			return null
 		}
-		questionService.editQuestion(editedQuestion, user).then(q => {dispatch(editQuestion(q))})
+		questionService.editQuestion(editedQuestion, user).then(q => {
+			dispatch(editQuestion(q))
+			dispatch(setNotification("Edit successful", 2))
+		})
 	}
 
 	const handleDelete = (id) => {

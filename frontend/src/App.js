@@ -12,6 +12,7 @@ import  Game  from "./components/game";
 import Home from "./components/home"
 import PlayingView from "./components/playing-view"
 import Notification from "./components/notification"
+import About from "./components/about"
 
 //services 
 import userService from "./services/user"
@@ -42,6 +43,9 @@ const App = () => {
 				</Route>
 				<Route exact path="/games">
           <GamePage />
+        </Route>
+				<Route exact path="/about">
+          <About />
         </Route>
 				<Route path="/games/:id">
 					<Game />

@@ -14,6 +14,7 @@ const NavBar = () => {
 	return (
 		<div className="nav">
 			<Link to="/">Home</Link>
+			<Link to="/about">About</Link>
 			{!user ?
 				<>
 					<Link id="signup" to="/signup">Sign Up</Link> 

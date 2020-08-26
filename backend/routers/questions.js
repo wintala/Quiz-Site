@@ -3,10 +3,6 @@ const Question = require("../models/question")
 const User = require("../models/user")
 const Game = require("../models/game")
 
-questionRouter.get("/", async (request, response) => {
-	const questions = await Question.find({})
-	response.json(questions)
-})
 
 questionRouter.get("/:id", async (request, response) => {
 	const question = await Question.findById(request.params.id)
